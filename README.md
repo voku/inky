@@ -37,11 +37,11 @@ $inky->addAlias('test', 'callout')
 $inky->releaseTheKraken('<test>123</test>'); //equal to "<callout>123</callout>"
 ``` 
     
-### Add your own Custom Component Factory
+### Add your own component factory
    
-Add your own Custom Component Factory, to convert HTML-Tags.   
+Add your own component factory, to convert custom HTML-Tags.   
    
-```
+```php
 <?php
 
 use Hampe\Inky\Component\ComponentFactoryInterface;
