@@ -1,5 +1,5 @@
 {
-    "name": "hampe/inky-parse",
+    "name": "hampe/inky",
     "description": "PHP Implementation of ZURB's Foundation for Email parser (Inky)",
     "version":     "1.2.3.0",
     "license": "MIT",
