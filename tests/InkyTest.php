@@ -30,7 +30,7 @@ class InkyTest extends PHPUnit_Framework_TestCase {
         $inky->addAlias('test', 'callout');
         $this->assertContains('test', $inky->getAllAliasForTagName('callout'), 'Inky Alias for Tag');
         $this->assertEquals($inky->getComponentFactory('callout'), $inky->getComponentFactory('test'));
-        $this->assertEquals('<table><tr><th class="callout">Test</th></tr></table>', $inky->releaseTheKraken('<test>Test</test>'));
+        $this->assertEquals('<table class="callout"><tr><th class="callout-inner">Test</th><th class="expander"></th></tr></table>', $inky->releaseTheKraken('<test>Test</test>'));
 
 
         $inky->removeAlias('test');

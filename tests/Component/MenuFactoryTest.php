@@ -23,85 +23,54 @@ class MenuFactoryTest extends AbstractComponentFactoryTest {
                         </menu>
                         ',
             'to'    =>  '
-                        <table class="menu">
-                            <tr>
-                              <th><a href="http://zurb.com">Item</a></th>
-                            </tr>
-                        </table>
+                      <table class="menu">
+                        <tr>
+                          <td>
+                            <table>
+                              <tr>
+                                <th class="menu-item"><a href="http://zurb.com">Item</a></th>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
                         '
         ),
         'creates a menu with classes' => array(
-            'from'  =>  '<menu class="awesome"></menu>',
+            'from'  =>  '<menu class="vertical"></menu>',
             'to'    =>  '
-                        <table class="menu awesome">
-                            <tr>
-                            </tr>
-                        </table>
-                        '
-        ),
-        'treats vertical menus differently' => array(
-            'from'  =>  '
-                        <menu class="vertical">
-                            <item href="#abc">ABC</item>
-                        </menu>
-                        ',
-            'to'    =>  '
-                        <table class="menu vertical">
-                            <tr>
-                              <th>
-                                <table class="menu-item">
-                                  <tr>
-                                    <th><a href="#abc">ABC</a></th>
-                                  </tr>
-                                </table>
-                              </th>
-                            </tr>
-                        </table>
+                      <table class="menu vertical">
+                        <tr>
+                          <td>
+                            <table>
+                              <tr>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
                         '
         ),
         'works without using an item tag' => array(
             'from'  =>  '
                         <menu>
-                            <td><a href="http://zurb.com">Item 1</a></td>
-                            <td><a href="http://zurb.com">Item 2</a></td>
+                            <th class="menu-item"><a href="http://zurb.com">Item 1</a></th>
                         </menu>
                         ',
             'to'    =>  '
                         <table class="menu">
                             <tr>
-                              <td><a href="http://zurb.com">Item 1</a></td>
-                              <td><a href="http://zurb.com">Item 2</a></td>
-                            </tr>
-                        </table>
-                        '
-        ),
-
-        'Case 1' => array(
-            'from' => '<menu class="test">Html</menu>',
-            'to' => '<table class="menu test"><tr>Html</tr></table>'
-        ),
-        'Case 3' => array(
-            'from'  =>  '
-                        <menu class="vertical">
-                            <item href="#abc">ABC</item>
-                            Test
-                        </menu>
-                        ',
-            'to'    =>  '
-                        <table class="menu vertical">
-                            <tr>
-                              <th>
-                                <table class="menu-item">
+                              <td>
+                                <table>
                                   <tr>
-                                    <th><a href="#abc">ABC</a></th>
+                                    <th class="menu-item"><a href="http://zurb.com">Item 1</a></th>
                                   </tr>
                                 </table>
-                                Test
-                              </th>
+                              </td>
                             </tr>
                         </table>
                         '
-        ),
+        )
     );
 
 }

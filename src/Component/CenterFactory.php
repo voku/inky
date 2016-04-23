@@ -41,7 +41,7 @@ class CenterFactory extends AbstractComponentFactory
         foreach($element->getChildren() as $childElement) {
             if($childElement instanceof HtmlNode) {
                 if($childElement->getAttribute('align') !== 'center'
-                    || !$this->elementHasCssClass($childElement, 'text-center')) {
+                    || !$this->elementHasCssClass($childElement, 'float-center')) {
                     $isParsed = false;
                 }
             }
@@ -51,13 +51,23 @@ class CenterFactory extends AbstractComponentFactory
         }
 
         $center = $this->node('center', $element->getAttributes());
+
+
         foreach($element->getChildren() as $childElement) {
             if($childElement instanceof HtmlNode) {
                 $childElement->setAttribute('align', 'center');
-                $this->addCssClass('text-center', $childElement);
+                $this->addCssClass('float-center', $childElement);
             }
             $center->addChild($childElement);
         }
+
+        $result = $center->find('.menu-item');
+        foreach($result as $node) {
+            if($node instanceof HtmlNode) {
+                $this->addCssClass('float-center', $node);
+            }
+        }
+
         return $center;
     }
 

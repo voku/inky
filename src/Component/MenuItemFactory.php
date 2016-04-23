@@ -34,7 +34,7 @@ class MenuItemFactory extends AbstractComponentFactory
     /**
      * <item href="{href}">{inner}</item>
      * ------------------------------
-     * <th>
+     * <th class="menu-item">
      *  <a href="{href}">{inner}</a>
      * </th>
      *
@@ -53,6 +53,7 @@ class MenuItemFactory extends AbstractComponentFactory
             $href = null;
         }
         $th = $this->th($attributes);
+        $this->addCssClass('menu-item', $th);
         $a = $this->node('a');
         if($href !== null) {
             $a->setAttribute('href', $href);

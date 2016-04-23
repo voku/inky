@@ -26,7 +26,7 @@ class CenterFactoryTest extends AbstractComponentFactoryTest
                         ',
             'to' =>     '
                         <center>
-                            <div align="center" class="text-center">Html</div>
+                            <div align="center" class="float-center">Html</div>
                         </center>
                         '
         ),
@@ -38,8 +38,34 @@ class CenterFactoryTest extends AbstractComponentFactoryTest
                         ',
             'to' =>     '
                         <center>
-                            <center align="center" class="text-center"></center>
+                            <center align="center" class="float-center"></center>
                         </center>
+                        '
+        ),
+        'applies the class float-center to <item> elements' => array(
+            'from' =>   '
+                        <center>
+                            <menu>
+                              <item href="#"></item>
+                            </menu>
+                        </center>
+                        ',
+            'to' =>     '
+                      <center>
+                        <table class="float-center menu" align="center">
+                          <tr>
+                            <td>
+                              <table>
+                                <tr>
+                                  <th class="float-center menu-item">
+                                    <a href="#"></a>
+                                  </th>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </center>
                         '
         )
     );

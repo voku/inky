@@ -18,28 +18,26 @@ namespace Component;
 class Test extends AbstractComponentFactoryTest {
     protected $testCases = array(
         'creates a callout with correct syntax' => array(
-            'from'  =>  '<callout></callout>',
+            'from'  =>  '<callout>Callout</callout>',
             'to'    =>  '
-                        <table>
+                        <table class="callout">
                             <tr>
-                              <th class="callout"></th>
+                              <th class="callout-inner">Callout</th>
+                              <th class="expander"></th>
                             </tr>
                         </table>
                         '
         ),
         'copies classes to the final HTML' => array(
-            'from'  =>  '<callout class="primary"></callout>',
+            'from'  =>  '<callout class="primary">Callout</callout>',
             'to'    =>  '
-                        <table>
+                        <table class="callout">
                             <tr>
-                              <th class="callout primary"></th>
+                              <th class="callout-inner primary">Callout</th>
+                              <th class="expander"></th>
                             </tr>
                         </table>
                         '
-        ),
-        'Case 1' => array(
-            'from' => '<callout class="test">Html</callout>',
-            'to' => '<table><tr><th class="callout test">Html</th></tr></table>'
         )
     );
 }

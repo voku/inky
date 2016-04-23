@@ -33,11 +33,12 @@ class CalloutFactory extends AbstractComponentFactory
     /**
      * <callout>{inner}</callout>
      * ----------------------------------
-     * <table>
+     *  <table class="callout">
      *      <tr>
-     *          <th class="callout {class}">{inner}</th>
+     *          <th class="callout-inner">Callout</th>
+     *          <th class="expander"></th>
      *      </tr>
-     * </table>
+     *  </table>
      *
      * @param HtmlNode $element
      * @param Inky $inkyInstance
@@ -46,14 +47,15 @@ class CalloutFactory extends AbstractComponentFactory
      */
     public function parse(HtmlNode $element, Inky $inkyInstance)
     {
-        $table = $this->table();
+        $table = $this->table(['class' => 'callout']);
         $tr = $this->tr();
 
         $th = $this->th($element->getAttributes());
-        $this->addCssClass('callout', $th);
+        $this->addCssClass('callout-inner', $th);
         $this->copyChildren($element, $th);
-
         $tr->addChild($th);
+        $expander = $this->th(['class' => 'expander']);
+        $tr->addChild($expander);
         $table->addChild($tr);
         return $table;
     }

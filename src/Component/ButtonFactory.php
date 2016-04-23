@@ -58,6 +58,7 @@ class ButtonFactory extends AbstractComponentFactory
      *              </tr>
      *          </table>
      *      </td>
+     *      <td class="exapnder"></td>
      *  </tr>
      * </table>
      *
@@ -101,9 +102,15 @@ class ButtonFactory extends AbstractComponentFactory
         $this->copyChildren($element, $lastChild);
 
         $childTr->addChild($childTd);
+
+
         $childTable->addChild($childTr);
         $td->addChild($childTable);
         $tr->addChild($td);
+        if($this->elementHasCssClass($element, 'expand')) {
+            $expanderTd = $this->td(['class' => 'expander']);
+            $tr->addChild($expanderTd);
+        }
         $table->addChild($tr);
 
         return $table;

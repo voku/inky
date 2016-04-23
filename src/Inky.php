@@ -26,6 +26,8 @@ use Hampe\Inky\Component\InkyFactory;
 use Hampe\Inky\Component\MenuFactory;
 use Hampe\Inky\Component\MenuItemFactory;
 use Hampe\Inky\Component\RowFactory;
+use Hampe\Inky\Component\SpacerFactory;
+use Hampe\Inky\Component\WrapperFactory;
 use PHPHtmlParser\Dom;
 use PHPHtmlParser\Dom\HtmlNode;
 use PHPHtmlParser\Exceptions\CircularException;
@@ -54,7 +56,10 @@ class Inky
         $this->addComponentFactory(new MenuItemFactory());
         $this->addComponentFactory(new ColumnsFactory());
         $this->addComponentFactory(new CalloutFactory());
+        $this->addComponentFactory(new SpacerFactory());
+        $this->addComponentFactory(new WrapperFactory());
         $this->addComponentFactory(new CenterFactory());
+
 
         foreach($componentFactories as $componentFactory) {
             if($componentFactory instanceof ComponentFactoryInterface) {

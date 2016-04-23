@@ -34,9 +34,17 @@ class MenuFactory extends AbstractComponentFactory
     /**
      * <menu>{inner}</menu>
      * ----------------------------
-     * <table class="menu {class}">
-     *  <tr>{inner}</tr>
-     * </table>
+     * <table class="menu">
+     *      <tr>
+     *          <td>
+     *              <table>
+     *                  <tr>
+     *                      {inner}
+     *                  </tr>
+     *              </table>
+     *          </td>
+     *      </tr>
+     *  </table>
      *
      * @param HtmlNode $element
      * @param Inky $inkyInstance
@@ -48,25 +56,14 @@ class MenuFactory extends AbstractComponentFactory
         $table = $this->table($element->getAttributes());
         $this->addCssClass('menu', $table);
         $tr = $this->tr();
+        $td = $this->td();
+        $childTable = $this->table();
+        $childTr = $this->tr();
+        $this->copyChildren($element, $childTr);
 
-        if($this->elementHasCssClass($element, 'vertical')) {
-            $th = $this->th();
-            foreach($element->getChildren() as $childElement) {
-                if($childElement instanceof HtmlNode) {
-                    $childTable = $this->table(array('class' => 'menu-item'));
-                    $childTr = $this->tr();
-
-                    $childTr->addChild($childElement);
-                    $childTable->addChild($childTr);
-                    $th->addChild($childTable);
-                }else {
-                    $th->addChild($childElement);
-                }
-            }
-            $tr->addChild($th);
-        }else {
-            $this->copyChildren($element, $tr);
-        }
+        $childTable->addChild($childTr);
+        $td->addChild($childTable);
+        $tr->addChild($td);
         $table->addChild($tr);
 
         return $table;
