@@ -30,6 +30,18 @@ class SpacerFactoryTest extends AbstractComponentFactoryTest
                         </table>
                         '
         ),
+        'creates a spacer with a default size or no size defined' => array(
+            'from' =>   '<spacer></spacer>',
+            'to' =>     '
+                        <table class="spacer">
+                            <tbody>
+                              <tr>
+                                <td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        '
+        ),
         'creates a spacer element for small screens with correct size' => array(
             'from' =>   '<spacer size-sm="10"></spacer>',
             'to' =>     '

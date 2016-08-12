@@ -75,7 +75,7 @@ class ColumnsFactory extends AbstractComponentFactory
         $table = $this->table();
         $tr = $this->tr();
         $childTh = $this->th();
-        $isExpanding = (bool) is_null($element->getAttribute('no-expander'));
+        $isExpanding = (bool) (is_null($element->getAttribute('no-expander')) || $element->getAttribute('no-expander') == 'false');
         $hasRowChildren = $this->hasRowChild($element, $inkyInstance); // must be called before children are moved
         $this->copyChildren($element, $childTh);
         $tr->addChild($childTh);

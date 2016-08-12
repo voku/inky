@@ -36,6 +36,26 @@ class MenuFactoryTest extends AbstractComponentFactoryTest {
                       </table>
                         '
         ),
+        'creates a menu with items tags inside, containing target="_blank" attribute' => array(
+            'from'  =>  '
+                        <menu>
+                            <item href="http://zurb.com" target="_blank">Item</item>
+                        </menu>
+                        ',
+            'to'    =>  '
+                      <table class="menu">
+                        <tr>
+                          <td>
+                            <table>
+                              <tr>
+                                <th class="menu-item"><a href="http://zurb.com" target="_blank">Item</a></th>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                        '
+        ),
         'creates a menu with classes' => array(
             'from'  =>  '<menu class="vertical"></menu>',
             'to'    =>  '

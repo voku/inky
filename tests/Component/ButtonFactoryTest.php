@@ -33,6 +33,22 @@ class ButtonFactoryTest extends AbstractComponentFactoryTest
                         </table>
                         '
         ),
+        'creates a button with target="_blank" attribute' => array(
+            'from'  => '<button target="_blank" href="http://zurb.com">Button</button>',
+            'to'    => '
+                        <table class="button">
+                            <tr>
+                              <td>
+                                <table>
+                                  <tr>
+                                    <td><a href="http://zurb.com" target="_blank">Button</a></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                        </table>
+            ',
+        ),
         'creates a button with classes' => array(
             'from'  => '<button class="small alert" href="http://zurb.com">Button</button>',
             'to'    => '
@@ -68,23 +84,7 @@ class ButtonFactoryTest extends AbstractComponentFactoryTest
                               </table>
             ',
         ),
-        'creates a button with target="_blank"' => array(
-            'from'  => '<button target="_blank" href="http://zurb.com">Button</button>',
-            'to'    => '
-                        <table class="button">
-                            <tr>
-                              <td>
-                                <table>
-                                  <tr>
-                                    <td><a href="http://zurb.com" target="_blank">Button</a></td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                        </table>
-            ',
-        ),
-        'creates a button with classes and target="_blank"' => array(
+        'creates a button with classes and target="_blank" attribute' => array(
             'from'  => '<button class="small alert" target="_blank" href="http://zurb.com">Button</button>',
             'to'    => '
                         <table class="button small alert">
