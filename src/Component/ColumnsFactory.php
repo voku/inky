@@ -69,6 +69,13 @@ class ColumnsFactory extends AbstractComponentFactory
      */
     public function parse(HtmlNode $element, Inky $inkyInstance)
     {
+        // This is a hack for no-expander because PhpDomParser doesn't seem to support value-less attributes.
+        $outerHtml = $element->outerHtml();
+        if(!$element->getAttribute('no-expander') && stristr($outerHtml, 'no-expander'))
+        {
+            $element->setAttribute('no-expander', 'true');
+        }
+
         $this->setGridColumns($inkyInstance->getGridColumns());
         $th = $this->th($this->getUsableAttributes($element));
         $th->setAttribute('class', $this->prepareCssClass($element));
