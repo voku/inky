@@ -67,6 +67,38 @@ class ButtonFactoryTest extends AbstractComponentFactoryTest
                                 </tr>
                               </table>
             ',
+        ),
+        'creates a button with target="_blank"' => array(
+            'from'  => '<button target="_blank" href="http://zurb.com">Button</button>',
+            'to'    => '
+                        <table class="button">
+                            <tr>
+                              <td>
+                                <table>
+                                  <tr>
+                                    <td><a href="http://zurb.com" target="_blank">Button</a></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                        </table>
+            ',
+        ),
+        'creates a button with classes and target="_blank"' => array(
+            'from'  => '<button class="small alert" target="_blank" href="http://zurb.com">Button</button>',
+            'to'    => '
+                        <table class="button small alert">
+                            <tr>
+                              <td>
+                                <table>
+                                  <tr>
+                                    <td><a href="http://zurb.com" target="_blank">Button</a></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                        </table>
+            ',
         )
     );
 

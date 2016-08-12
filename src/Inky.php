@@ -25,10 +25,13 @@ use Hampe\Inky\Component\ContainerFactory;
 use Hampe\Inky\Component\InkyFactory;
 use Hampe\Inky\Component\MenuFactory;
 use Hampe\Inky\Component\MenuItemFactory;
+use Hampe\Inky\Component\RawFactory;
 use Hampe\Inky\Component\RowFactory;
 use Hampe\Inky\Component\SpacerFactory;
 use Hampe\Inky\Component\WrapperFactory;
 use PHPHtmlParser\Dom;
+use PHPHtmlParser\Dom\AbstractNode;
+use PHPHtmlParser\Dom\Collection;
 use PHPHtmlParser\Dom\HtmlNode;
 use PHPHtmlParser\Exceptions\CircularException;
 
@@ -59,6 +62,7 @@ class Inky
         $this->addComponentFactory(new SpacerFactory());
         $this->addComponentFactory(new WrapperFactory());
         $this->addComponentFactory(new CenterFactory());
+        $this->addComponentFactory(new RawFactory());
 
 
         foreach($componentFactories as $componentFactory) {
@@ -197,13 +201,26 @@ class Inky
         foreach($this->getAllComponentFactories() as $tag => $factory) {
             $elements = $dom->getElementsByTag($tag);
             foreach($elements as $element) {
-                /** @var HtmlNode $element */
+                /** @var AbstractNode|Collection $element */
                 $newElement = $factory->parse($element, $this);
-                if(!$newElement instanceof HtmlNode) {
+
+                $collection = new Collection();
+                if($newElement instanceof Collection)
+                {
+                    $collection = $newElement;
+                }
+                elseif($newElement instanceof AbstractNode)
+                {
+                    $collection[] = $newElement;
+                }
+
+                if(!$collection->count())
+                {
                     continue;
                 }
+
                 // replace element
-                if($newElement->id() !== $element->id()) {
+                if($collection[0]->id() !== $element->id()) {
                     $parseInComplete = true;
                     //replace element with new element
                     $parent = $element->getParent();
@@ -212,7 +229,9 @@ class Inky
                         /** @var $sibling HtmlNode*/
                         $parent->removeChild($sibling->id());
                         if($sibling->id() === $element->id()) {
-                            $parent->addChild($newElement);
+                            foreach($collection->toArray() as $elementToAdd) {
+                                $parent->addChild($elementToAdd);
+                            }
                         }else {
                             $parent->addChild($sibling);
                         }

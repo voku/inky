@@ -70,17 +70,17 @@ class ColumnsFactory extends AbstractComponentFactory
     public function parse(HtmlNode $element, Inky $inkyInstance)
     {
         $this->setGridColumns($inkyInstance->getGridColumns());
-        $th = $this->th();
-        $cssClass = $this->prepareCssClass($element);
-        $th->setAttribute('class' ,$cssClass);
+        $th = $this->th($this->getUsableAttributes($element));
+        $th->setAttribute('class', $this->prepareCssClass($element));
         $table = $this->table();
         $tr = $this->tr();
         $childTh = $this->th();
+        $isExpanding = (bool) is_null($element->getAttribute('no-expander'));
         $hasRowChildren = $this->hasRowChild($element, $inkyInstance); // must be called before children are moved
         $this->copyChildren($element, $childTh);
         $tr->addChild($childTh);
         //if element contains as <row />
-        if($hasRowChildren) {
+        if($hasRowChildren && $isExpanding) {
             $expander = $this->th(array('class' => 'expander'));
             $tr->addChild($expander);
         }
