@@ -16,6 +16,8 @@ namespace Hampe\Inky\Component;
 
 
 use Hampe\Inky\Inky;
+use PHPHtmlParser\Dom\AbstractNode;
+use PHPHtmlParser\Dom\Collection;
 use PHPHtmlParser\Dom\HtmlNode;
 
 interface ComponentFactoryInterface
@@ -30,7 +32,7 @@ interface ComponentFactoryInterface
      * @param HtmlNode $element
      * @param Inky $inkyInstance
      *
-     * @return HtmlNode
+     * @return AbstractNode|Collection
      */
     public function parse(HtmlNode $element, Inky $inkyInstance);
 

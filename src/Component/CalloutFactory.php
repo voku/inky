@@ -47,7 +47,8 @@ class CalloutFactory extends AbstractComponentFactory
      */
     public function parse(HtmlNode $element, Inky $inkyInstance)
     {
-        $table = $this->table(['class' => 'callout']);
+        $table = $this->table($this->getUsableAttributes($element, 'class'));
+        $this->addCssClass('callout', $table);
         $tr = $this->tr();
 
         $th = $this->th($element->getAttributes());

@@ -52,11 +52,23 @@ class MenuItemFactory extends AbstractComponentFactory
         } else {
             $href = null;
         }
+
+        if(isset($attributes['target'])) {
+            $target = $attributes['target'];
+            unset($attributes['target']);
+        } else {
+            $target = null;
+        }
+
         $th = $this->th($attributes);
         $this->addCssClass('menu-item', $th);
         $a = $this->node('a');
         if($href !== null) {
             $a->setAttribute('href', $href);
+
+            if($target !== null) {
+                $a->setAttribute('target', (string) $target);
+            }
         }
         $this->copyChildren($element, $a);
         $th->addChild($a);

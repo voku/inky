@@ -24,6 +24,10 @@ class MenuItemFactoryTest extends AbstractComponentFactoryTest {
             'from' => '<item class="test">Html</item>',
             'to' => '<th class="menu-item test"><a>Html</a></th>'
         ),
+        'Case 3' => array(
+            'from' => '<item class="test" href="http://example.com/123" target="_blank">Html</item>',
+            'to' => '<th class="menu-item test"><a href="http://example.com/123" target="_blank">Html</a></th>'
+        ),
     );
 
 }

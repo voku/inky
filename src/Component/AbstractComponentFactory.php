@@ -80,4 +80,21 @@ abstract class AbstractComponentFactory implements ComponentFactoryInterface
     {
         $element->setAttribute('class', trim($cssClass . ' ' . $element->getAttribute('class')));
     }
+
+    protected function getUsableAttributes(HtmlNode $element, $exclude = [])
+    {
+        $exclude = (array) $exclude;
+        $ignoredAttributes = ['href', 'size', 'size-sm', 'size-lg', 'large', 'no-expander', 'small', 'target'];
+
+        $newAttributes = [];
+        foreach($element->getAttributes() as $attribute => $value)
+        {
+            if(!in_array($attribute, $ignoredAttributes) && !in_array($attribute, $exclude))
+            {
+                $newAttributes[$attribute] = $value;
+            }
+        }
+
+        return $newAttributes;
+    }
 }

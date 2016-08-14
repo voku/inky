@@ -33,6 +33,22 @@ class ColumnsFactoryTest extends AbstractComponentFactoryTest
             'from' => '<columns small="3" large="5"><row>Html</row></columns>',
             'to' => '<th class="columns small-3 large-5 last first"><table><tr><th><table class="row"><tbody><tr>Html</tr></tbody></table></th><th class="expander"></th></tr></table></th>'
         ),
+        'Case 5 (no expander)' => array(
+            'from' => '<columns small="3" large="5" no-expander><row>Html</row></columns>',
+            'to' => '<th class="columns small-3 large-5 last first"><table><tr><th><table class="row"><tbody><tr>Html</tr></tbody></table></th></tr></table></th>'
+        ),
+        'Case 6 (no expander is false)' => array(
+            'from' => '<columns small="3" large="5" no-expander="false"><row>Html</row></columns>',
+            'to' => '<th class="columns small-3 large-5 last first"><table><tr><th><table class="row"><tbody><tr>Html</tr></tbody></table></th><th class="expander"></th></tr></table></th>'
+        ),
+        'Case 7 (valign)' => array(
+            'from' => '<columns large="12" valign="top">Html</columns>',
+            'to' => '<th valign="top" class="columns small-12 large-12 last first"><table><tr><th>Html</th></tr></table></th>'
+        ),
+        'Case 8 (classes)' => array(
+            'from' => '<columns class="small-offset-8 hide-for-small">Html</columns>',
+            'to' => '<th class="columns small-offset-8 hide-for-small small-12 large-12 last first"><table><tr><th>Html</th></tr></table></th>'
+        ),
     );
 
 }

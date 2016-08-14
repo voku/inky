@@ -71,10 +71,17 @@ class ButtonFactory extends AbstractComponentFactory
     {
         $attributes = $element->getAttributes();
         if(isset($attributes['href'])) {
-            $href= $attributes['href'];
+            $href = $attributes['href'];
             unset($attributes['href']);
         } else {
             $href = null;
+        }
+
+        if(isset($attributes['target'])) {
+            $target = $attributes['target'];
+            unset($attributes['target']);
+        } else {
+            $target = null;
         }
 
         $table = $this->table($attributes);
@@ -95,6 +102,11 @@ class ButtonFactory extends AbstractComponentFactory
         //wrap in <a /> if element has href
         if($href !== null) {
             $a = $this->node('a', array('href' => (string) $href));
+
+            if($target !== null) {
+                $a->setAttribute('target', (string) $target);
+            }
+
             $lastChild->addChild($a);
             $lastChild = $a;
         }

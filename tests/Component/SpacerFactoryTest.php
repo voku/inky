@@ -30,6 +30,61 @@ class SpacerFactoryTest extends AbstractComponentFactoryTest
                         </table>
                         '
         ),
+        'creates a spacer with a default size or no size defined' => array(
+            'from' =>   '<spacer></spacer>',
+            'to' =>     '
+                        <table class="spacer">
+                            <tbody>
+                              <tr>
+                                <td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        '
+        ),
+        'creates a spacer element for small screens with correct size' => array(
+            'from' =>   '<spacer size-sm="10"></spacer>',
+            'to' =>     '
+                        <table class="spacer hide-for-large">
+                            <tbody>
+                              <tr>
+                                <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        '
+        ),
+        'creates a spacer element for large screens with correct size' => array(
+            'from' =>   '<spacer size-lg="20"></spacer>',
+            'to' =>     '
+                        <table class="spacer show-for-large">
+                            <tbody>
+                              <tr>
+                                <td height="20px" style="font-size:20px;line-height:20px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        '
+        ),
+        'creates a spacer element for small and large screens with correct sizes' => array(
+            'from' =>   '<spacer size-sm="10" size-lg="20"></spacer>',
+            'to' =>     '
+                        <table class="spacer hide-for-large">
+                            <tbody>
+                              <tr>
+                                <td height="10px" style="font-size:10px;line-height:10px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        <table class="spacer show-for-large">
+                            <tbody>
+                              <tr>
+                                <td height="20px" style="font-size:20px;line-height:20px;">&#xA0;</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        '
+        ),
         'copies classes to the final spacer HTML' => array(
             'from' =>   '<spacer size="10" class="bgcolor"></spacer>',
             'to' =>     '

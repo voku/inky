@@ -20,6 +20,10 @@ class BlockFactoryTest extends AbstractComponentFactoryTest
         'Case 1' => array(
             'from' => '<block-grid up="12">Html</block-grid>',
             'to' => '<table class="block-grid up-12"><tr>Html</tr></table>'
+        ),
+        'Case 2' => array(
+            'from' => '<block-grid up="12" class="show-for-large">Html</block-grid>',
+            'to' => '<table class="block-grid up-12 show-for-large"><tr>Html</tr></table>'
         )
     );
 
