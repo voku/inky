@@ -16,7 +16,7 @@ namespace Component;
 
 
 use Hampe\Inky\Inky;
-use Hampe\Inky\PHPHtmlParser\Dom;
+use PHPHtmlParser\Dom;
 
 class AbstractComponentFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -43,6 +43,10 @@ class AbstractComponentFactoryTest extends \PHPUnit_Framework_TestCase {
         foreach($this->testCases as $caseName => $testCase) {
             $fromHtml = trim(preg_replace('~>\s+<~', '><', $testCase['from']));
             $dom = new Dom();
+            $dom->setOptions([
+                'removeStyles' => false,
+                'removeScripts' => false,
+            ]);
             $dom->load((string)  trim(preg_replace('~>\s+<~', '><', $testCase['to'])));
             $toHtml = $dom->root->outerHtml();
             $result = $inky->releaseTheKraken($fromHtml);

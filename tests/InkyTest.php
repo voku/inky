@@ -11,7 +11,7 @@
  *  @date       13.03.16
  */
 
-use Hampe\Inky\PHPHtmlParser\Dom;
+use PHPHtmlParser\Dom;
 
 
 class InkyTest extends PHPUnit_Framework_TestCase {
@@ -56,6 +56,10 @@ class InkyTest extends PHPUnit_Framework_TestCase {
         foreach($stylesTestCases as $caseName => $testCase) {
             $fromHtml = trim(preg_replace('~>\s+<~', '><', $testCase['from']));
             $dom = new Dom();
+            $dom->setOptions([
+                'removeStyles' => false,
+                'removeScripts' => false,
+            ]);
             $dom->load((string)  trim(preg_replace('~>\s+<~', '><', $testCase['to'])));
             $toHtml = $dom->root->outerHtml();
             $result = $inky->releaseTheKraken($fromHtml);

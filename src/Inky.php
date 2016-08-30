@@ -29,10 +29,11 @@ use Hampe\Inky\Component\RawFactory;
 use Hampe\Inky\Component\RowFactory;
 use Hampe\Inky\Component\SpacerFactory;
 use Hampe\Inky\Component\WrapperFactory;
-use Hampe\Inky\PHPHtmlParser\Dom;
+use PHPHtmlParser\Dom;
 use PHPHtmlParser\Dom\AbstractNode;
 use PHPHtmlParser\Dom\Collection;
 use PHPHtmlParser\Dom\HtmlNode;
+use PHPHtmlParser\Dom\InnerNode;
 use PHPHtmlParser\Exceptions\CircularException;
 
 class Inky
@@ -183,6 +184,10 @@ class Inky
     public function releaseTheKraken($html)
     {
         $dom = new Dom();
+        $dom->setOptions([
+            'removeStyles' => false,
+            'removeScripts' => false,
+        ]);
         $dom->load((string) $html);
 
         $parseCounter = 0;
@@ -196,14 +201,15 @@ class Inky
         return $dom->root->outerhtml;
     }
 
-    protected function clearCache(AbstractNode $node)
+    protected function clearCache(InnerNode $node)
     {
         foreach($node->getChildren() as $child) {
             if($child instanceof AbstractNode) {
-                $this->clearCache($child);
+                if($child instanceof InnerNode) {
+                    $this->clearCache($child);
+                }
                 $node->removeChild($child->id());
                 $node->addChild($child);
-
             }
         }
     }
@@ -237,7 +243,11 @@ class Inky
                     $parseInComplete = true;
                     //replace element with new element
                     $parent = $element->getParent();
-                    $siblings = $element->getParent()->getChildren();
+                    if(!$parent instanceof InnerNode) {
+                        continue;
+                    }
+
+                    $siblings = $parent->getChildren();
                     foreach($siblings as $sibling) {
                         /** @var $sibling HtmlNode*/
                         $parent->removeChild($sibling->id());
