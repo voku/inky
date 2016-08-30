@@ -96,6 +96,84 @@ class SpacerFactoryTest extends AbstractComponentFactoryTest
                             </tbody>
                           </table>
                         '
+        ),
+        '1.3.6.0 upgrade breaking nested spacers #6' => array(
+            'from' =>  '<container>
+                            <wrapper>
+                                <row>
+                                    <columns small="12" large="12">
+
+                                        <spacer size="40"></spacer>
+
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    <spacer size="220"></spacer>
+                                                </th>
+                                            </tr>
+                                        </table>
+
+                                        <spacer size="40"></spacer>
+
+                                    </columns>
+                                </row>
+                            </wrapper>
+                        </container>',
+            'to' => '<table class="container">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="wrapper" align="center">
+                                        <tr>
+                                            <td class="wrapper-inner">
+                                                <table class="row">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="columns small-12 large-12 last first">
+                                                                <table>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <table class="spacer">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td height="40px" style="font-size:40px;line-height:40px;">&#xA0;</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <th>
+                                                                                        <table class="spacer">
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td height="220px" style="font-size:220px;line-height:220px;">&#xA0;</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <table class="spacer">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td height="40px" style="font-size:40px;line-height:40px;">&#xA0;</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                            </th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>'
         )
     );
 }

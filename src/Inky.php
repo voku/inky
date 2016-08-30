@@ -192,7 +192,20 @@ class Inky
                 throw new CircularException('Inky reached max parsing runs of '.$parseCounter);
             }
         };
+        $this->clearCache($dom->root);
         return $dom->root->outerhtml;
+    }
+
+    protected function clearCache(AbstractNode $node)
+    {
+        foreach($node->getChildren() as $child) {
+            if($child instanceof AbstractNode) {
+                $this->clearCache($child);
+                $node->removeChild($child->id());
+                $node->addChild($child);
+
+            }
+        }
     }
 
     protected function parse(Dom $dom)
