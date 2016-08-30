@@ -29,7 +29,7 @@ use Hampe\Inky\Component\RawFactory;
 use Hampe\Inky\Component\RowFactory;
 use Hampe\Inky\Component\SpacerFactory;
 use Hampe\Inky\Component\WrapperFactory;
-use PHPHtmlParser\Dom;
+use Hampe\Inky\PHPHtmlParser\Dom;
 use PHPHtmlParser\Dom\AbstractNode;
 use PHPHtmlParser\Dom\Collection;
 use PHPHtmlParser\Dom\HtmlNode;

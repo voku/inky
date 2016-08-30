@@ -9,7 +9,9 @@
  *  @author     Thomas Hampe <github@hampe.co>
  *  @copyright  2013-2016 Thomas Hampe
  *  @date       13.03.16
- */ 
+ */
+
+use Hampe\Inky\PHPHtmlParser\Dom;
 
 
 class InkyTest extends PHPUnit_Framework_TestCase {
@@ -38,6 +40,27 @@ class InkyTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(null, $inky->getComponentFactory('test'));
         $this->assertEquals('<test>Test</test>', $inky->releaseTheKraken('<test>Test</test>'));
 
+    }
+
+    public function testStyles()
+    {
+        $inky = new \Hampe\Inky\Inky();
+
+        $stylesTestCases = array(
+            'Style tags are being stripped out #7' => array(
+                'from' => '<style>body { text-decoration: underline}</style>',
+                'to' => '<style>body { text-decoration: underline}</style>'
+            )
+        );
+
+        foreach($stylesTestCases as $caseName => $testCase) {
+            $fromHtml = trim(preg_replace('~>\s+<~', '><', $testCase['from']));
+            $dom = new Dom();
+            $dom->load((string)  trim(preg_replace('~>\s+<~', '><', $testCase['to'])));
+            $toHtml = $dom->root->outerHtml();
+            $result = $inky->releaseTheKraken($fromHtml);
+            $this->assertEquals($toHtml, $result, sprintf('Case failed: %s', $caseName));
+        }
     }
 
 }
